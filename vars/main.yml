@@ -1,2 +1,7 @@
 ---
+<<<<<<< HEAD
 supported_systems: ['CentOS', 'Red Hat Enterprise Linux', 'Ubuntu', 'Debian']
+=======
+# vars file for kibana-role
+elk_stack_version: "{{ version }}"
+>>>>>>> 70e387bc483236c9e864d21af672219623893cb7

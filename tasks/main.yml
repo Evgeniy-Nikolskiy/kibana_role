@@ -1,4 +1,5 @@
 ---
+<<<<<<< HEAD
 - import_tasks: precheck.yml
 - name: Check files directory exists
   file:
@@ -9,3 +10,22 @@
 - include_tasks: "download_{{ ansible_facts.pkg_mgr }}.yml"
 - include_tasks: "install_{{ ansible_facts.pkg_mgr }}.yml"
 - import_tasks: configure.yml
+=======
+- name: "Download Kibana's rpm"
+  get_url:
+    url: "https://artifacts.elastic.co/downloads/kibana/kibana-7.14.0-x86_64.rpm"
+    dest: "/tmp/kibana-7.14.0-x86_64.rpm"
+  register: download_kibana
+  until: download_kibana is succeeded
+- name: Install Kibana
+  become: true
+  yum:
+    name: "/tmp/kibana-7.14.0-x86_64.rpm"
+    state: present
+- name: Configure Kibana
+  become: true
+  template:
+    src: kibana.yml.j2
+    dest: /etc/kibana/kibana.yml
+  notify: restart Kibana
+>>>>>>> 70e387bc483236c9e864d21af672219623893cb7
